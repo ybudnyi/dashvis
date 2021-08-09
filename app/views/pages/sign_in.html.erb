@@ -1,0 +1,45 @@
+<%= csrf_meta_tags %>
+
+<body class="login-page">
+  <div class="login-box">
+  <div class="logo">
+      <a href="javascript:void(0);">Dash<b>Vis</b></a>
+  </div>
+  <div class="card">
+      <div class="header">
+        <h2 style="text-align: center;">Sign in with</h2>
+        <br>
+              <div class="row">
+                  <div class="col-md-3 col-xs-6">
+                      <a class="btn btn-block bg-red waves-effect" href="/auth/google_oauth2"><strong><i class="fa fa-google fa-lg" aria-hidden="true" style="padding: 10px;"></i></strong></a>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                      <a class="btn btn-block bg-indigo waves-effect" href="/auth/facebook"><strong><i class="fa fa-facebook fa-lg" aria-hidden="true" style="padding: 10px;"></i></strong></a>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                      <a class="btn btn-block bg-blue waves-effect" href="/auth/linkedin"><strong><i class="fa fa-linkedin fa-lg" aria-hidden="true" style="padding: 10px;"></i></strong></a>
+                  </div>
+                  <div class="col-md-3 col-xs-6">
+                      <a class="btn btn-block bg-black waves-effect" href="/auth/github"><strong><i class="fa fa-github fa-lg" aria-hidden="true" style="padding: 10px;"></i></strong></a>
+                  </div>
+              </div>
+
+      </div>
+      <div class="body">
+        <div class="bg-green">
+        <%= render 'shared_partials/alert.html.erb', alert: flash %>
+
+      </div>
+
+  <p style="text-align: center;">
+    Everyone has their own set of resources to organize - Wallet, To-Dos, Bookmarks, Passwords, Notepad, Books, etc. If you're one of them, say hello to <b>DashVis : A one-place open-source Dashboard</b> built for users. Manage your resources by organizing them into Tables and Folders. Have a look at <a href="https://github.com/athityakumar/DashVis/wiki">the User's Manual</a> for more details.</p>
+
+  <p style="text-align: center;">
+    Like this project? Feel free to star and contribute to the
+    <a href="https://github.com/athityakumar/DashVis">DashVis Code Repository</a> on GitHub.
+  </p>
+      </div>
+  </div>
+</div>
+
+</body>

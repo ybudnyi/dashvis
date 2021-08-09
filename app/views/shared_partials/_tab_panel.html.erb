@@ -1,0 +1,85 @@
+<section class="content" style="margin-top: 70px;">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="header">
+
+        <h2>
+          <%= name %>
+        <% if edit_access %>
+          <div class="btn-group right">
+            <% if type == 'Table' %>
+              <a class="btn btn-color delete-table" href="#" data-url="/tables/<%= id %>/delete" data-name="<%= name %>" data-type="ajax-loader"><i class="material-icons">delete</i> <span>Delete table</span>
+              </a>
+            <% else %>
+              <a class="btn btn-color delete-collection" href="#" data-url="/collections/<%= id %>/delete" data-name="<%= name %>" data-type="ajax-loader"><i class="material-icons">delete</i> <span>Delete folder</span>
+              </a>
+            <% end %>
+          </div>
+        <% end %>
+
+        <% if edit_access %>
+          <ol class="breadcrumb breadcrumb-color" style="margin-left: -15px;">
+            <% if type == 'Table' %>
+              <li><a href="/tables"><i class="material-icons">grid_on</i> Tables</a></li>
+            <% else %>
+              <li><a href="/collections"><i class="material-icons">folder</i> Folders</a></li>
+            <% end %>
+            <li class="active"> <%= name %></li>
+          </ol>
+        <% end %>
+
+
+        </h2>
+        <p style="margin-top: 30px">
+          <strong>Description</strong>
+        </p>
+        <p style="margin-top: 10px">
+          <%= description %>
+          <br>
+          <% if edit_access %>
+            <% if type == 'Table' %>
+              <% if collections.empty? %>
+                  This table doesn't belong to any folder. You can add this table to existing folders in the <a href="/tables/<%= id %>/edit">settings</a>.
+              <% else %>
+                This table belongs to <%= pluralize(collections.count, "folder") %>.
+              <% end %>
+            <% elsif type == 'Collection' %>
+              <% if tables.empty? %>
+                  This folder doesn't seem to contain any table. You can add existing tables to this folder in the <a href="/collections/<%= id %>/edit">settings</a>.
+              <% else %>
+                This folder contains <%= pluralize(tables.count, "table") %>.
+              <% end %>
+            <% end %>
+          <% end %>
+        </p>
+
+        <p>
+          <% if edit_access %>
+            <% if type == 'Table' %>
+              <% unless collections.empty? %>
+                <% collections.each do |collection| %>
+                  <a href="/collections/<%= collection.id %>" class="btn btn-color"><i class="material-icons">folder</i> <span><%= collection.name %></span></a>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        </p>
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+          <% tabs.each_with_index do |tab, i| %>
+            <% if tab[:text] == active_tab %>
+              <li role="presentation" class="active">
+                <a><i class="material-icons"><%= tab[:icon] %></i> <span class="hidden-xs hidden-sm"><%= tab[:text] %></span></a>
+              </li>
+            <% else %>
+              <li role="presentation">
+                <a href="<%= tab[:link] %>"><i class="material-icons"><%= tab[:icon] %></i> <span class="hidden-xs hidden-sm"><%= tab[:text] %></span></a>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

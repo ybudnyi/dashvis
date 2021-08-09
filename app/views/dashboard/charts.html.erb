@@ -1,0 +1,40 @@
+<%= csrf_meta_tags %>
+
+<% @current_user[:color_scheme] ||= 'black' %>
+
+<body class="theme-<%= @current_user[:color_scheme] %>">
+  <%= render 'shared_partials/loader.html.erb', color: @current_user[:color_scheme] %>
+  <%= render 'shared_partials/header.html.erb' %>
+
+  <section>
+    <%= render 'shared_partials/sidebar_left.html.erb', user: @current_user %>
+    <%= render 'shared_partials/sidebar_right.html.erb', color: @current_user[:color_scheme] %>
+  </section>
+
+  <%= render 'shared_partials/tab_panel.html.erb',
+    name: 'Dashboard',
+    description: 'The master table that contains data about all other tables.',
+    table_id: false,
+    edit_access: false,
+    active_tab: 'CHARTS',
+    tabs: [
+      {text: 'TABLES', icon: 'grid_on', link: '/tables'},
+      {text: 'FOLDERS', icon: 'folder', link: '/collections'},
+      {text: 'SETTINGS', icon: 'settings', link: '/settings'}
+    ] %>
+
+  <section class="content" style="margin-top: 0px;">
+    <div class="container-fluid">
+      <div class="row">
+        <% @category_datasets_list.each_with_index do |category_dataset, i| %>
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <%= render 'shared_partials/chart.html.erb',
+              chart: {type: 'line', name: nil, description: nil}, i: i,
+              xaxis: @category_columns_list[i].map { |col| col.gsub('_', ' ')}.join(', '), yaxis: 'No. of tables',
+              category_columns: @category_columns_list[i], category_datasets: category_dataset %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</body>
