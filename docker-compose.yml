@@ -17,7 +17,7 @@ services:
         depends_on:
             - db
 #        restart: always
-        image: dashvis:${TAG}
+        image: dashvis:${BUILD_ID}
         ports:
             - 3000:3000/tcp
         networks:
