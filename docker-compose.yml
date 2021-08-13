@@ -2,7 +2,7 @@ version: '3'
 services:
     db:
 #        build: ./db
-        image: postgre:1
+        image: postgres:12.7-alpine
         volumes:
             - postgre_db:/var/lib/postgresql/data
         networks:
