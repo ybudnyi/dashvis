@@ -14,7 +14,7 @@ services:
     ruby:
         depends_on:
             - db
-        image: dashvis:${TAG}
+        image: myregistry.domain.com/dashvis:${TAG}
 #       volumes:
 #            - /log:/demo2/logs
         ports:
